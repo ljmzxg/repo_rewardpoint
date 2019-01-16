@@ -1,0 +1,98 @@
+#1、基础微服务
+CREATE DATABASE IF NOT EXISTS tensquare_base DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
+
+CREATE TABLE IF NOT EXISTS `tensquare_base`.`tb_label`(
+   `id` VARCHAR(20) NOT NULL,
+   `labelname` VARCHAR(100),
+   `state` VARCHAR(1),
+   `count` BIGINT(20),
+   `recommend` VARCHAR(1),
+   `fans` BIGINT(20),
+   PRIMARY KEY ( `id` )
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+#2、招聘微服务
+CREATE DATABASE IF NOT EXISTS tensquare_recruit DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
+#2.1 企业表
+CREATE TABLE IF NOT EXISTS `tensquare_recruit`.`tb_enterprise`(
+   `id` VARCHAR(20) NOT NULL,
+   `name` VARCHAR(100) COMMENT '企业名称',
+   `summary` VARCHAR(100) COMMENT '企业简介' ,
+   `address` VARCHAR(100) COMMENT '企业地址',
+   `labels` VARCHAR(200) COMMENT '标签列表， 用逗号隔开',
+   `coordinate` VARCHAR(100) COMMENT '坐标',
+   `ishot` VARCHAR(1) COMMENT '是否热门 0(非热门)，1(热门)',
+   `logo` VARCHAR(100) COMMENT 'LOGO',
+   `jobcount` int(4) COMMENT '职位数',
+   `url` VARCHAR(200) COMMENT '企业网址',
+   PRIMARY KEY ( `id` )
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+#2.2 招聘表
+CREATE TABLE IF NOT EXISTS `tensquare_recruit`.`tb_recruit`(
+   `id` VARCHAR(20) NOT NULL,
+   `jobname` VARCHAR(100) COMMENT '职位名称',
+   `salary` VARCHAR(100) COMMENT '薪资范围' ,
+   `condition` VARCHAR(100) COMMENT '经验要求',
+   `education` VARCHAR(100) COMMENT '学历要求',
+   `type` VARCHAR(1) COMMENT '任职方式',
+   `address` VARCHAR(100) COMMENT '办公地址',
+   `eid` VARCHAR(20) COMMENT '企业id',
+   `createtime` timestamp COMMENT '创建日期',
+   `state` VARCHAR(1) COMMENT '状态：0（关闭） 1（开启） 2（推荐）',
+   `url` VARCHAR(200) COMMENT '原网址',
+   `label` VARCHAR(100) COMMENT '标签',
+   `content1` VARCHAR(1000) COMMENT '职位描述',
+   `content2` VARCHAR(1000) COMMENT '职位要求',
+   PRIMARY KEY ( `id` )
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+#3、问答微服务
+CREATE DATABASE IF NOT EXISTS tensquare_qa DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
+#3.1 中间表tb_pl，关联problem & label
+CREATE TABLE IF NOT EXISTS `tensquare_qa`.`tb_pl`(
+   `problemid` VARCHAR(20) NOT NULL COMMENT '问题ID',
+   `labelid` VARCHAR(20) NOT NULL COMMENT '标签ID',
+   PRIMARY KEY (`problemid`,`labelid`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+#3.2 problem 表
+CREATE TABLE IF NOT EXISTS `tensquare_qa`.`tb_problem`(
+   `id` VARCHAR(20) NOT NULL COMMENT '问题ID',
+   `title` VARCHAR(100) COMMENT '标题',
+   `content` TEXT COMMENT '内容',
+   `createtime` DATETIME COMMENT '创建日期',
+   `updatetime` DATETIME COMMENT '修改日期',
+   `userid` VARCHAR(20) COMMENT '用户ID',
+   `nickname` VARCHAR(100) COMMENT '昵称',
+   `visits` BIGINT(20) COMMENT '浏览量',
+   `thumbup` BIGINT(20) COMMENT '点赞数',
+   `reply` BIGINT(20) COMMENT '回复数',
+   `solve` VARCHAR(1) COMMENT '是否解决',
+   `replyname` VARCHAR(100) COMMENT '回复人昵称',
+   `replytime` DATETIME COMMENT '回复日期',
+   PRIMARY KEY (`id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+#3.3 回复表 tb_reply
+CREATE TABLE IF NOT EXISTS `tensquare_qa`.`tb_reply`(
+   `id` VARCHAR(20) NOT NULL COMMENT '回复ID',
+   `problemid` VARCHAR(20) COMMENT '问题ID',
+   `content` TEXT COMMENT '回复内容',
+   `createtime` DATETIME COMMENT '创建日期',
+   `updatetime` DATETIME COMMENT '修改日期',
+   `userid` VARCHAR(20) COMMENT '回复人ID',
+   `nickname` VARCHAR(100) COMMENT '昵称',
+   PRIMARY KEY (`id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+#4、文章微服务
+
+#5、缓存处理
+
+
+
+
+
+
+
