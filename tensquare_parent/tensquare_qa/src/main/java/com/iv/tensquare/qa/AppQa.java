@@ -1,4 +1,4 @@
-package com.iv.tensquare.base;
+package com.iv.tensquare.qa;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -7,15 +7,15 @@ import org.springframework.context.annotation.Bean;
 import util.IdWorker;
 
 @SpringBootApplication
-public class AppBase {
-
+public class AppQa {
+	
 	public static void main(String[] args) {
-		SpringApplication.run(AppBase.class, args);
+		SpringApplication.run(AppQa.class, args);
 	}
 	
 	@Bean
-	public IdWorker idWorker(){
+	public IdWorker idWorker () {
 		return new IdWorker(1, 1);
 	}
-	
+
 }

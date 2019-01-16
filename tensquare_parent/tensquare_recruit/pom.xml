@@ -6,9 +6,9 @@
 		<artifactId>tensquare_parent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>tensquare_base</artifactId>
-	<name>tensquare_base</name>
-	<description>tensquare_base_desc</description>
+	<artifactId>tensquare_recruit</artifactId>
+	<name>tensquare_recruit</name>
+	<description>tensquare_recruit_desc</description>
 
 	<dependencies>
 		<dependency>
@@ -26,7 +26,6 @@
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
-
 	</dependencies>
 
 </project>
