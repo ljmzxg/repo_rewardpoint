@@ -6,9 +6,9 @@
 		<artifactId>tensquare_parent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>tensquare_qa</artifactId>
-	<name>tensquare_qa</name>
-	<description>tensquare_qa_desc</description>
+	<artifactId>tensquare_gathering</artifactId>
+	<name>tensquare_gathering</name>
+	<description>tensquare_gathering_desc</description>
 
 	<dependencies>
 		<dependency>

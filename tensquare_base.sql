@@ -87,6 +87,28 @@ CREATE TABLE IF NOT EXISTS `tensquare_qa`.`tb_reply`(
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 #4、文章微服务
+CREATE DATABASE IF NOT EXISTS tensquare_article DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
+
+CREATE TABLE IF NOT EXISTS `tensquare_article`.`tb_article`(
+   `id` VARCHAR(20) NOT NULL COMMENT '文章ID',
+   `columnid` VARCHAR(100) COMMENT '专栏ID',
+   `userid` VARCHAR(100) COMMENT '用户ID',
+   `title` VARCHAR(100) COMMENT '文章标题',
+   `content` TEXT COMMENT '文章内容',
+   `image` VARCHAR(100) COMMENT '文章封面',
+   `createtime` DATETIME COMMENT '发表日期',
+   `updatetime` DATETIME COMMENT '修改日期',
+   `ispublic` VARCHAR(1) COMMENT '是否公开，0(不公开), 1(公开)',
+   `istop` VARCHAR(1) COMMENT '是否置顶，0(不置顶), 1(置顶)',
+   `visits` INT(20) COMMENT '浏览量',
+   `thumbup` INT(20) COMMENT '点赞数',
+   `comment` INT(20) COMMENT '评论数',
+   `state` VARCHAR(1) COMMENT '审核状态，0(未审核), 1(已审核)',
+   `channelid` VARCHAR(20) COMMENT '所属频道，频道表ID',
+   `url` VARCHAR(200) COMMENT 'url',
+   `type` VARCHAR(1) COMMENT '文章类型，0(分享),1(专栏)',
+   PRIMARY KEY (`id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 #5、缓存处理
 
