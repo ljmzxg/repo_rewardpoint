@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: tensquare_search
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: Zhang Xiang Guo
+Implementation-Vendor-Id: com.iv.tensquare
+Build-Jdk: 1.8.0_101
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
+ ot-starter-parent/tensquare_parent/tensquare_search
+Created-By: Maven Integration for Eclipse
+

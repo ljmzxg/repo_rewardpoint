@@ -31,11 +31,6 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 		</dependency>
 
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-redis</artifactId>
-		</dependency>
-
 	</dependencies>
 
 	<repositories>
@@ -86,5 +81,7 @@
 		<module>tensquare_qa</module>
 		<module>tensquare_article</module>
 		<module>tensquare_gathering</module>
+		<module>tensquare_spit</module>
+		<module>tensquare_search</module>
 	</modules>
 </project>
