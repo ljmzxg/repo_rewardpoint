@@ -15,7 +15,12 @@ public class RabbitmqTest {
 	private RabbitTemplate rabbitTemplate;
 	
 	@Test
-	public void testSend() {
-		rabbitTemplate.convertAndSend("tensquare_rabbitmq", "猪年快乐03");
+	public void testSendDirect() {
+		rabbitTemplate.convertAndSend("tensquare_rabbitmq", "猪年快乐01");
+	}
+	
+	@Test
+	public void testSendFanoutExchange() {
+		rabbitTemplate.convertAndSend("fanout_exchange", "", "fanout exchange 小猪佩奇过大年");
 	}
 }
