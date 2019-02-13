@@ -27,7 +27,7 @@ public class ArticleService {
 	}
 
 	public Page<Article> findByKey(String key, int page, int size) {
-		Pageable pageable = PageRequest.of(page, size);
+		Pageable pageable = PageRequest.of(page - 1, size);
 		return articleDao.findByTitleOrContentLike(key, key, pageable);
 	}
 	

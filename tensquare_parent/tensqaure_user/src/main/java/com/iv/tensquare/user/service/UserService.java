@@ -1,5 +1,6 @@
 package com.iv.tensquare.user.service;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,6 +36,12 @@ public class UserService {
 
 	public void save(User user) {
 		user.setId(idWorker.nextId() + "");
+		user.setFollowcount(0);//关注数
+		user.setFanscount(0);	//粉丝数
+		user.setOnline(0L);		//在线时长
+		user.setRegdate(new Date());//注册日期
+		user.setUpdatedate(new Date());//更新日期
+		user.setLastdate(new Date());	//最后登陆日期
 		userDao.save(user);
 	}
 
@@ -66,8 +73,6 @@ public class UserService {
 		rabbitTemplate.convertAndSend("sms", map);
 		//控制台输出一份
 		System.out.println("验证码为：" + checkcode);
-		
-		
 	}
 	
 	

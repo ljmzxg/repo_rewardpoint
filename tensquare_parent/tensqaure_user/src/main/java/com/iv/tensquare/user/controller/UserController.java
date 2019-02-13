@@ -1,6 +1,7 @@
 package com.iv.tensquare.user.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +20,26 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private RedisTemplate<String, Object> redisTemplate;
+	
+	@RequestMapping(value = "/register/{code}", method = RequestMethod.POST)
+	public Result regist(@PathVariable String code, @RequestBody User user) {
+		//得到缓存中的验证码
+		String checkcodeRedis = (String) redisTemplate.opsForValue().get("checkcode_" + user.getMobile());
+		if(checkcodeRedis.isEmpty()) {
+			return new Result(false, StatusCode.ERROR, "请先获取手机验证码");
+		}
+		
+		if( !checkcodeRedis.equals(code) ) {
+			return new Result(false, StatusCode.ERROR, "请输入正确的验证码");
+		}
+		
+		userService.save(user);
+		return new Result(true, StatusCode.OK, "注册成功");
+		
+	}
 	
 	/**
 	 * 发送短信验证码

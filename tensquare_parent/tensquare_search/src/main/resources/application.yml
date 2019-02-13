@@ -5,7 +5,7 @@ spring:
     name: tensquare-search   
   data:
     elasticsearch:
-      cluster-nodes: 192.168.8.82:9300
+      cluster-nodes: 192.168.43.101:9300
       repositories:
         enabled: true
       cluster-name: elasticsearch
