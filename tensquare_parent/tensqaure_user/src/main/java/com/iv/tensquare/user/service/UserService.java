@@ -1,8 +1,14 @@
 package com.iv.tensquare.user.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
+import org.apache.commons.lang3.RandomStringUtils;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,6 +26,12 @@ public class UserService {
 	
 	@Autowired
 	private IdWorker idWorker;
+	
+	@Autowired
+	private RedisTemplate<String, Object> redisTemplate;
+	
+	@Autowired
+	private RabbitTemplate rabbitTemplate;
 
 	public void save(User user) {
 		user.setId(idWorker.nextId() + "");
@@ -40,6 +52,22 @@ public class UserService {
 
 	public void deleteById(String userId) {
 		userDao.deleteById(userId);
+	}
+
+	public void sendSms(String mobile) {
+		//生成六位数字随机数
+		String checkcode = RandomStringUtils.randomNumeric(6);
+		//缓存中存放一份，且有效时间为6小时
+		redisTemplate.opsForValue().set("checkcode_" + mobile, checkcode, 6, TimeUnit.HOURS);
+		//用户发一份
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("mobile", mobile);
+		map.put("checkcode", checkcode);
+		rabbitTemplate.convertAndSend("sms", map);
+		//控制台输出一份
+		System.out.println("验证码为：" + checkcode);
+		
+		
 	}
 	
 	
