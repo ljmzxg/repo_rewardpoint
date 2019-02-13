@@ -112,9 +112,28 @@ CREATE TABLE IF NOT EXISTS `tensquare_article`.`tb_article`(
 
 #5、缓存处理
 
+#6、用户
+CREATE DATABASE IF NOT EXISTS tensquare_user DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
 
-
-
+CREATE TABLE IF NOT EXISTS `tensquare_user`.`tb_user`(
+   `id` VARCHAR(20) NOT NULL COMMENT '用户ID',
+   `mobile` VARCHAR(100) COMMENT '手机号码',
+   `password` VARCHAR(100) COMMENT '密码',
+   `nickname` VARCHAR(100) COMMENT '用户昵称',
+   `sex` VARCHAR(2) COMMENT '性别',
+   `birthday` DATETIME COMMENT '出生年月日',
+   `avator` VARCHAR(100) COMMENT '头像',
+   `email` VARCHAR(100) COMMENT 'E-mail',
+   `regdate` DATETIME COMMENT '注册日期',
+   `updatedate` DATETIME COMMENT '修改日期',
+   `lastdate` DATETIME COMMENT '最后登录日期',
+   `online` BIGINT(20) COMMENT '在线时长（分钟）',
+   `interest` VARCHAR(100) COMMENT '兴趣',
+   `personality` VARCHAR(100) COMMENT '个性',
+   `fanscount` INT(20) COMMENT '粉丝数',
+   `followcount` INT(20) COMMENT '关注数',
+   PRIMARY KEY (`id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 
