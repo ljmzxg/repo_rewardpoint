@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: elasticsearch_test
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: Zhang Xiang Guo
+Implementation-Vendor-Id: com.iv.es
+Build-Jdk: 1.8.0_101
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
+ ot-starter-parent/elasticsearch_test
+Created-By: Maven Integration for Eclipse
+
