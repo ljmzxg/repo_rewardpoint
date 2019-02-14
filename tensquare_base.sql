@@ -135,5 +135,14 @@ CREATE TABLE IF NOT EXISTS `tensquare_user`.`tb_user`(
    PRIMARY KEY (`id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE IF NOT EXISTS `tensquare_user`.`tb_admin`(
+   `id` VARCHAR(20) NOT NULL COMMENT '管理员ID',
+   `loginname` VARCHAR(100) COMMENT '管理员名称',
+   `password` VARCHAR(100) COMMENT '密码',
+   `state` VARCHAR(2) COMMENT '状态',
+   PRIMARY KEY (`id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
 
 

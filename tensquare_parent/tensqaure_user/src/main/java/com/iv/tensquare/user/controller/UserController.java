@@ -24,6 +24,26 @@ public class UserController {
 	@Autowired
 	private RedisTemplate<String, Object> redisTemplate;
 	
+	/**
+	 * 用户登录
+	 * @param user
+	 * @return
+	 */
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public Result login(@RequestBody User user) {
+		User userLogin = userService.login(user.getMobile(), user.getPassword());
+		if(userLogin == null) {
+			return new Result(false, StatusCode.LOGINERROR, "登录失败");
+		}
+		return new Result(true, StatusCode.OK, "登录成功");
+	}
+	
+	/**
+	 * 用户注册
+	 * @param code
+	 * @param user
+	 * @return
+	 */
 	@RequestMapping(value = "/register/{code}", method = RequestMethod.POST)
 	public Result regist(@PathVariable String code, @RequestBody User user) {
 		//得到缓存中的验证码
@@ -38,7 +58,6 @@ public class UserController {
 		
 		userService.save(user);
 		return new Result(true, StatusCode.OK, "注册成功");
-		
 	}
 	
 	/**

@@ -10,6 +10,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,9 +34,21 @@ public class UserService {
 	
 	@Autowired
 	private RabbitTemplate rabbitTemplate;
+	
+	@Autowired
+	private BCryptPasswordEncoder encoder;
+	
+	public User login(String mobile, String password) {
+		User userLogin = userDao.findByMobile(mobile);
+		if(userLogin != null && encoder.matches(password, userLogin.getPassword())) {
+			return userLogin;
+		}
+		return null;
+	}
 
 	public void save(User user) {
 		user.setId(idWorker.nextId() + "");
+		user.setPassword( encoder.encode(user.getPassword()) );
 		user.setFollowcount(0);//关注数
 		user.setFanscount(0);	//粉丝数
 		user.setOnline(0L);		//在线时长
@@ -73,10 +86,9 @@ public class UserService {
 		rabbitTemplate.convertAndSend("sms", map);
 		//控制台输出一份
 		System.out.println("验证码为：" + checkcode);
+		
 	}
-	
-	
-	
+
 	
 	
 }

@@ -8,4 +8,13 @@
   <artifactId>tensquare_common</artifactId>
   <name>tensquare_common</name>
   <description>tensquare_common_desc</description>
+  
+  <dependencies>
+	<dependency>
+	    <groupId>io.jsonwebtoken</groupId>
+	    <artifactId>jjwt</artifactId>
+	    <version>0.9.1</version>
+	</dependency>
+  </dependencies>
+  
 </project>

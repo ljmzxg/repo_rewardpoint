@@ -4,13 +4,16 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "tb_user")
 public class User implements Serializable{
 
+	@Id
 	private String id;
+	
 	private String mobile;
 	private String password;
 	private String nickname;
