@@ -6,7 +6,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -17,7 +20,9 @@ import org.springframework.transaction.annotation.Transactional;
 import com.iv.tensquare.user.dao.UserDao;
 import com.iv.tensquare.user.pojo.User;
 
+import io.jsonwebtoken.Claims;
 import util.IdWorker;
+import util.JwtUtil;
 
 @Service
 @Transactional
@@ -37,6 +42,12 @@ public class UserService {
 	
 	@Autowired
 	private BCryptPasswordEncoder encoder;
+	
+	@Autowired
+	private JwtUtil jwtUtil;
+	
+	@Autowired
+	private HttpServletRequest request;
 	
 	public User login(String mobile, String password) {
 		User userLogin = userDao.findByMobile(mobile);
@@ -71,6 +82,33 @@ public class UserService {
 	}
 
 	public void deleteById(String userId) {
+//		String header = request.getHeader("Authorization");
+//		if(header == null || "".equals(header)) {
+//			throw new RuntimeException("权限不足！");
+//		}
+//		
+//		if( !header.startsWith("Bearer ") ) {
+//			throw new RuntimeException("权限不足！");
+//		}
+//		
+//		//得到token
+//		String token = header.substring(7);
+//		try {
+//			Claims claims = jwtUtil.parseJWT(token);
+//			String roles = (String) claims.get("roles");
+//			if(roles == null || !roles.equals("admin")) {
+//				throw new RuntimeException("权限不足！");
+//			}
+//		} catch(Exception e) {
+//			throw new RuntimeException("权限不足！");
+//		}
+		
+		//此部分功能等同上面注释代码
+		String token = (String) request.getAttribute("claims_admin");
+		if(StringUtils.isEmpty(token)) {
+			throw new RuntimeException("权限不足！");
+		}
+		
 		userDao.deleteById(userId);
 	}
 
