@@ -99,5 +99,6 @@
 		<module>tensqaure_user</module>
 		<module>tensquare_sms</module>
 		<module>tensquare_eureka</module>
+		<module>tensquare_friend</module>
 	</modules>
 </project>

@@ -26,7 +26,7 @@ public class UserController {
 	private UserService userService;
 	
 	@Autowired
-	private RedisTemplate<String, Object> redisTemplate;
+	private RedisTemplate redisTemplate;
 	
 	@Autowired
 	private JwtUtil jwtUtil;

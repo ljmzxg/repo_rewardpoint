@@ -1,4 +1,4 @@
-package com.iv.tensquare.user.interceptor;
+package com.iv.tensquare.friend.interceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -32,11 +32,11 @@ public class JwtInterceptor implements HandlerInterceptor {
 					Claims claims = jwtUtil.parseJWT(token);
 					String roles = (String) claims.get("roles");
 					if(roles != null && roles.equals("admin")) {
-						request.setAttribute("claims_admin", token);
+						request.setAttribute("claims_admin", claims);
 					}
 					
 					if(roles != null && roles.equals("user")) {
-						request.setAttribute("claims_user", token);
+						request.setAttribute("claims_user", claims);
 					}
 					
 				} catch(Exception e) {

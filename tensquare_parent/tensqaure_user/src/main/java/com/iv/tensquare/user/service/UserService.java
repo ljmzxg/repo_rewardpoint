@@ -20,7 +20,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.iv.tensquare.user.dao.UserDao;
 import com.iv.tensquare.user.pojo.User;
 
-import io.jsonwebtoken.Claims;
 import util.IdWorker;
 import util.JwtUtil;
 
@@ -35,7 +34,7 @@ public class UserService {
 	private IdWorker idWorker;
 	
 	@Autowired
-	private RedisTemplate<String, Object> redisTemplate;
+	private RedisTemplate redisTemplate;
 	
 	@Autowired
 	private RabbitTemplate rabbitTemplate;

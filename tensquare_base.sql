@@ -143,6 +143,19 @@ CREATE TABLE IF NOT EXISTS `tensquare_user`.`tb_admin`(
    PRIMARY KEY (`id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+#交友服务
+CREATE DATABASE IF NOT EXISTS tensquare_friend DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
 
+CREATE TABLE IF NOT EXISTS `tensquare_friend`.`tb_friend`(
+   `userid` VARCHAR(20) NOT NULL COMMENT '用户ID',
+   `friendid` VARCHAR(20) COMMENT '好友id',
+   `islike` VARCHAR(2) COMMENT '是否相互喜欢',
+   PRIMARY KEY (`id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE IF NOT EXISTS `tensquare_friend`.`tb_nofriend`(
+   `userid` VARCHAR(20) NOT NULL COMMENT '用户ID',
+   `friendid` VARCHAR(20) COMMENT '好友id',
+   PRIMARY KEY (`id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

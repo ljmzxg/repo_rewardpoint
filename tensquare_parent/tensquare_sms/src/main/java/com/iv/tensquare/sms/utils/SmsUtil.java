@@ -49,6 +49,8 @@ public class SmsUtil {
 	 * @throws ClientException 
 	 */
 	public SendSmsResponse sendSms(String mobile, String template_code, String sign_name, String param) throws ClientException {
+		System.out.println("sendSms start");
+		System.out.println("mobile:" + mobile + ",template_code:" + template_code + ",sign_name:" + sign_name + ",param:" + param);
 		String accessKeyId = env.getProperty("aliyun.sms.accessKeyId");
 		String accessKeySecret = env.getProperty("aliyun.sms.accessKeySecret");
 		//可自助调整超时时间
@@ -56,8 +58,8 @@ public class SmsUtil {
 		System.setProperty("sun.net.client.defaultReadTimeout", "10000");
 		//初始化accessClient， 暂不支持region 化
 		IClientProfile profile = DefaultProfile.getProfile(regionId, accessKeyId, accessKeySecret);
-//		DefaultProfile.addEndpoint(endpointName, regionId, product, domain);
-		DefaultProfile.addEndpoint(regionId, product, endpointName);
+		DefaultProfile.addEndpoint(endpointName, regionId, product, domain);
+//		DefaultProfile.addEndpoint(regionId, product, endpointName);
 		IAcsClient acsClient = new DefaultAcsClient(profile);
 		//组装请求对象
 		SendSmsRequest request = new SendSmsRequest();
@@ -79,7 +81,7 @@ public class SmsUtil {
 			//请求成功
 			return sendSmsResponse;
 		}
-		
+		System.out.println("sendSms end");
 		return null;
 	}
 	
@@ -91,7 +93,8 @@ public class SmsUtil {
 		System.setProperty("sun.net.client.defaultReadTimeout", "10000");
 		//初始化accessClient， 暂不支持region 化
 		IClientProfile profile = DefaultProfile.getProfile(regionId, accessKeyId, accessKeySecret);
-		DefaultProfile.addEndpoint(regionId, product, endpointName);
+		DefaultProfile.addEndpoint(endpointName, regionId, product, domain);
+//		DefaultProfile.addEndpoint(regionId, product, endpointName);
 		IAcsClient acsClient = new DefaultAcsClient(profile);
 		//组装请求对象
 		QuerySendDetailsRequest request = new QuerySendDetailsRequest();
