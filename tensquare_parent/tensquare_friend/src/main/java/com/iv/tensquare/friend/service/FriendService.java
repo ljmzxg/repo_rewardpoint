@@ -6,7 +6,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.iv.tensquare.friend.dao.FriendDao;
+import com.iv.tensquare.friend.dao.NoFriendDao;
 import com.iv.tensquare.friend.pojo.Friend;
+import com.iv.tensquare.friend.pojo.NoFriend;
 
 @Service
 @Transactional
@@ -14,6 +16,9 @@ public class FriendService {
 
 	@Autowired
 	private FriendDao friendDao;
+	
+	@Autowired
+	private NoFriendDao noFriendDao;
 	
 	public int addFriend(String userid, String friendid) {
 		//先判断userid 到friendid 是否有数据，有数据表示重复添加，返回0
@@ -35,6 +40,20 @@ public class FriendService {
 			friendDao.updateIslike("1", userid, friendid );
 			friendDao.updateIslike("1", friendid, userid);
 		}
+		return 1;
+	}
+
+	public int addNoFriend(String userid, String friendid) {
+		//先判断是否已经是非好友
+		NoFriend noFriend = noFriendDao.findByUseridAndFriendid(userid, friendid);
+		if(noFriend != null) {
+			return 0;
+		}
+		
+		noFriend = new NoFriend();
+		noFriend.setUserid(userid);
+		noFriend.setFriendid(friendid);
+		noFriendDao.save(noFriend);
 		return 1;
 	}
 

@@ -48,6 +48,15 @@ public class FriendController {
 				
 			} else if("2".equals(type)) {
 				//添加非好友
+				int flag = friendService.addNoFriend(userid, friendid);
+				if(flag == 0) {
+					return new Result(false, StatusCode.ERROR, "不能重复添加非好友");
+				}
+				
+				if(flag == 1) {
+					return new Result(true, StatusCode.OK, "添加成功");
+				}
+				
 			}
 			return new Result(false, StatusCode.ERROR, "参数异常");
 		} 
