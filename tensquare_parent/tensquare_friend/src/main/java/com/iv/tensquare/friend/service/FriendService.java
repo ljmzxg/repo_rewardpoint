@@ -57,4 +57,17 @@ public class FriendService {
 		return 1;
 	}
 
+	public void deleteFriend(String userid, String friendid) {
+		//删除tb_friend 表中的数据
+		friendDao.deleteFriend(userid, friendid);
+		
+		//更新friendid 到userid 的islike 为0
+		friendDao.updateIslike("0", friendid, userid);
+		
+		//保存非好友信息
+		NoFriend noFriend = new NoFriend();
+		noFriend.setUserid(userid);
+		noFriend.setFriendid(friendid);
+		noFriendDao.save(noFriend);
+	}
 }

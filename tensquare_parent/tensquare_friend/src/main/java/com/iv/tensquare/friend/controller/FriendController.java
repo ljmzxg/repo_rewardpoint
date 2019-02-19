@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.iv.tensquare.friend.client.UserClient;
 import com.iv.tensquare.friend.service.FriendService;
 
 import entity.Result;
@@ -23,6 +24,9 @@ public class FriendController {
 	
 	@Autowired
 	private FriendService friendService;
+	
+	@Autowired
+	private UserClient userClient;
 	
 	@RequestMapping(value = "/like/{friendid}/{type}", method = RequestMethod.PUT)
 	public Result addFriend(@PathVariable String friendid, @PathVariable String type) {
@@ -43,6 +47,7 @@ public class FriendController {
 				}
 				
 				if(flag == 1) {
+					userClient.updateFanscountAndFollowcount(userid, friendid, 1);
 					return new Result(true, StatusCode.OK, "添加成功");
 				}
 				
@@ -62,6 +67,26 @@ public class FriendController {
 		} 
 		
 		return new Result(false, StatusCode.ERROR, "参数异常");
+	}
+	
+	/**
+	 * 删除好友
+	 * @return
+	 */
+	@RequestMapping(value = "/{friendid}", method = RequestMethod.DELETE)
+	public Result deleteFriend(@PathVariable String friendid) {
+		//验证是否登录，并且拿到当前登录用户的id
+		Claims claims = (Claims) request.getAttribute("claims_user");
+		if(claims == null) {
+			return new Result(false, StatusCode.ERROR, "权限不足");
+		}
+		
+		//得到当前登录用户id
+		String userid = claims.getId();
+		friendService.deleteFriend(userid, friendid);
+		userClient.updateFanscountAndFollowcount(userid, friendid, -1);
+		
+		return new Result(true, StatusCode.OK, "删除好友成功");
 	}
 	
 }

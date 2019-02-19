@@ -48,6 +48,11 @@ public class UserService {
 	@Autowired
 	private HttpServletRequest request;
 	
+	public void updateFanscountAndFollowcount(int x, String userid, String friendid) {
+		userDao.updateFanscount(x, friendid);
+		userDao.updateFollowcount(x, userid);
+	}
+	
 	public User login(String mobile, String password) {
 		User userLogin = userDao.findByMobile(mobile);
 		if(userLogin != null && encoder.matches(password, userLogin.getPassword())) {
@@ -126,6 +131,5 @@ public class UserService {
 		
 	}
 
-	
 	
 }
