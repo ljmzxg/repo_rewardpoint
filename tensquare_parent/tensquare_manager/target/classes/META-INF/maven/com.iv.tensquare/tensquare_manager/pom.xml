@@ -6,25 +6,13 @@
 		<artifactId>tensquare_parent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>tensquare_base</artifactId>
-	<name>tensquare_base</name>
-	<description>tensquare_base_desc</description>
+	<artifactId>tensquare_manager</artifactId>
 
 	<dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
-		</dependency>
-
 		<dependency>
 			<groupId>com.iv.tensquare</groupId>
 			<artifactId>tensquare_common</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
-
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
 
 		<dependency>
@@ -34,9 +22,8 @@
 
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-config</artifactId>
+			<artifactId>spring-cloud-starter-netflix-zuul</artifactId>
 		</dependency>
-
 	</dependencies>
 
 </project>

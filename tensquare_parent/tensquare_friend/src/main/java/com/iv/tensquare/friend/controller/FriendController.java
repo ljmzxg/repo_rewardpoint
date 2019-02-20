@@ -28,6 +28,23 @@ public class FriendController {
 	@Autowired
 	private UserClient userClient;
 	
+	/**
+	 * 删除好友
+	 * @return
+	 */
+	@RequestMapping(value = "/{friendid}", method = RequestMethod.DELETE)
+	public Result deleteFriend(@PathVariable String friendid) {
+		//验证是否登录，并且拿到当前登录用户的id
+		Claims claims = (Claims) request.getAttribute("claims_user");
+		if(claims == null) {
+			return new Result(false, StatusCode.ERROR, "权限不足");
+		}
+		//得到当前登录用户id
+		String userid = claims.getId();
+		friendService.deleteFriend(userid, friendid);
+		userClient.updateFanscountAndFollowcount(userid, friendid, -1);
+		return new Result(true, StatusCode.OK, "删除好友成功");
+	}
 	@RequestMapping(value = "/like/{friendid}/{type}", method = RequestMethod.PUT)
 	public Result addFriend(@PathVariable String friendid, @PathVariable String type) {
 		//验证是否登陆，并且拿到当前登陆的用户id
@@ -45,7 +62,6 @@ public class FriendController {
 				if(flag == 0) {
 					return new Result(false, StatusCode.ERROR, "不能重复添加好友");
 				}
-				
 				if(flag == 1) {
 					userClient.updateFanscountAndFollowcount(userid, friendid, 1);
 					return new Result(true, StatusCode.OK, "添加成功");
@@ -69,24 +85,5 @@ public class FriendController {
 		return new Result(false, StatusCode.ERROR, "参数异常");
 	}
 	
-	/**
-	 * 删除好友
-	 * @return
-	 */
-	@RequestMapping(value = "/{friendid}", method = RequestMethod.DELETE)
-	public Result deleteFriend(@PathVariable String friendid) {
-		//验证是否登录，并且拿到当前登录用户的id
-		Claims claims = (Claims) request.getAttribute("claims_user");
-		if(claims == null) {
-			return new Result(false, StatusCode.ERROR, "权限不足");
-		}
-		
-		//得到当前登录用户id
-		String userid = claims.getId();
-		friendService.deleteFriend(userid, friendid);
-		userClient.updateFanscountAndFollowcount(userid, friendid, -1);
-		
-		return new Result(true, StatusCode.OK, "删除好友成功");
-	}
 	
 }

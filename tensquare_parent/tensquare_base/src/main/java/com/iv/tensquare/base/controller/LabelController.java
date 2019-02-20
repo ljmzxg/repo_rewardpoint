@@ -2,6 +2,8 @@ package com.iv.tensquare.base.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -25,6 +27,9 @@ public class LabelController {
 
 	@Autowired
 	private LabelService labelService;
+	
+	@Autowired
+	private HttpServletRequest request;
 
 	/**
 	 * 查询所有Label
@@ -33,6 +38,10 @@ public class LabelController {
 	 */
 	@RequestMapping(method = RequestMethod.GET)
 	public Result findAll() {
+		//获取头信息
+		String header = request.getHeader("Authorization");
+		System.out.println("header" + header);
+		
 		return new Result(true, StatusCode.OK, "查询成功", labelService.findAll());
 	}
 
