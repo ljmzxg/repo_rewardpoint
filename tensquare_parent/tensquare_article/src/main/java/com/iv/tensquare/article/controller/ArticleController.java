@@ -1,6 +1,7 @@
 package com.iv.tensquare.article.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,6 +25,7 @@ import io.swagger.annotations.ApiOperation;
 @RestController
 @CrossOrigin
 @RequestMapping("/article")
+@RefreshScope
 public class ArticleController {
 	
 	@Autowired

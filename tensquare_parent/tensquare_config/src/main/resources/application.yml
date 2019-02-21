@@ -11,7 +11,14 @@ spring:
           uri: https://gitee.com/sam_git/tensquare-config.git
           username: 2019661692@qq.com
           password: ljmzxg19900301
-
+  rabbitmq: 
+    host: 192.168.43.101
+management: 
+  endpoints:  
+    web:  
+      exposure: 
+        include:  bus-refresh
+          
 #eureka:
 #  client:
 #    register-with-eureka: true

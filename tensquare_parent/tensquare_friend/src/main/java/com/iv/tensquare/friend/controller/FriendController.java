@@ -3,6 +3,7 @@ package com.iv.tensquare.friend.controller;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,6 +18,7 @@ import io.jsonwebtoken.Claims;
 
 @RestController
 @RequestMapping("/friend")
+@RefreshScope
 public class FriendController {
 
 	@Autowired

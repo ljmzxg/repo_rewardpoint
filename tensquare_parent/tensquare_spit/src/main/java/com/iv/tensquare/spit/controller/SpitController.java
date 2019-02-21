@@ -1,6 +1,7 @@
 package com.iv.tensquare.spit.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.data.domain.Page;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -20,6 +21,7 @@ import entity.StatusCode;
 @RestController
 @CrossOrigin
 @RequestMapping("/spit")
+@RefreshScope
 public class SpitController {
 
 	@Autowired

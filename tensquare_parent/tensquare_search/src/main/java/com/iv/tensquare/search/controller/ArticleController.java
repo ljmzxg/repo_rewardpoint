@@ -1,6 +1,7 @@
 package com.iv.tensquare.search.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +20,7 @@ import entity.StatusCode;
 @RestController
 @RequestMapping("/article")
 @CrossOrigin
+@RefreshScope
 public class ArticleController {
 
 	@Autowired
