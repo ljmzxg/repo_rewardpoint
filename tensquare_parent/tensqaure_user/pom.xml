@@ -33,6 +33,11 @@
 		</dependency>
 
 		<dependency>
+			<groupId>redis.clients</groupId>
+			<artifactId>jedis</artifactId>
+		</dependency>
+
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-amqp</artifactId>
 		</dependency>
@@ -73,7 +78,7 @@
 		</dependency>
 
 	</dependencies>
-	
+
 	<build>
 		<finalName>app</finalName>
 		<plugins>
@@ -81,7 +86,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-			
+
 			<!-- docker 的maven 插件，官网：https://github.com/spotify/docker-maven-plugin -->
 			<plugin>
 				<groupId>com.spotify</groupId>
