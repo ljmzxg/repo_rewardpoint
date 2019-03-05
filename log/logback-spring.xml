@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%date{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="rollingFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>/home/ignitevision/data/logs/rewardPoint.log</file>
+<!-- 		<file>D:/home/ignitevision/data/logs/rewardPoint.log</file> -->
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>/home/ignitevision/data/logs/rewardPoint.%d{yyyy-MM-dd}.log</fileNamePattern>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%date{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+		</encoder>
+	</appender>
+	
+    <appender name="STATISTICS" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <file>/home/ignitevision/data/logs/rewardPoint_statistics.log</file>
+<!-- 		<file>D:/home/ignitevision/data/logs/rewardPoint_statistics.log</file> -->
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                    <fileNamePattern>/home/ignitevision/data/logs/rewardPoint_statistics.%d{yyyy-MM-dd}.log</fileNamePattern>
+            </rollingPolicy>
+            <encoder>
+                    <pattern>%date{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+            </encoder>
+    </appender>
+
+
+	<!-- project default level -->
+	<logger name="com.ignitevision.rewardpoint" level="INFO" />
+	<!-- 开发配置-->
+	<logger name="org.hibernate" level="INFO" />
+	<logger name="org.springframework" level="INFO" />
+
+	<logger name="jdbc.sqltiming" level="OFF"/>
+	<logger name="jdbc.resultset" level="OFF"/>
+	<logger name="jdbc.audit" level="OFF"/>
+	<logger name="jdbc.sqlonly" level="OFF"/>
+	<logger name="jdbc.connection" level="OFF"/>
+	<!-- end -->
+	<!-- 数据统计日志 -->
+    <logger name="STATISTICS" level="INFO" additivity="false">
+            <appender-ref ref="STATISTICS" />
+    </logger>
+	
+
+	<root level="INFO">
+		<appender-ref ref="console" />
+		<appender-ref ref="rollingFile" />
+	</root>
+</configuration>

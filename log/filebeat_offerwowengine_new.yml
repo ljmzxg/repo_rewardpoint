@@ -1,0 +1,18 @@
+filebeat:
+  prospectors:
+    -
+      paths:
+        - /home/affiliate/data/logs/offerengine_statistics.log
+      input_type: log
+      document_type: offerwow3_log4j_offerwowengine
+  registry_file: /var/lib/filebeat/registry
+
+output:
+
+  logstash:
+    hosts: ["10.10.10.91:5010"]
+    worker: 1
+
+logging:
+  files:
+    rotateeverybytes: 10485760 # = 10MB
