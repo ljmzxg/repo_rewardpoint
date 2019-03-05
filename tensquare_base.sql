@@ -1,7 +1,7 @@
 #1、基础微服务
-CREATE DATABASE IF NOT EXISTS tensquare_base DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
+CREATE DATABASE IF NOT EXISTS rewardPoint_base DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
 
-CREATE TABLE IF NOT EXISTS `tensquare_base`.`tb_label`(
+CREATE TABLE IF NOT EXISTS `rewardPoint_base`.`tb_label`(
    `id` VARCHAR(20) NOT NULL,
    `labelname` VARCHAR(100),
    `state` VARCHAR(1),
@@ -12,9 +12,9 @@ CREATE TABLE IF NOT EXISTS `tensquare_base`.`tb_label`(
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 #2、招聘微服务
-CREATE DATABASE IF NOT EXISTS tensquare_recruit DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
+CREATE DATABASE IF NOT EXISTS rewardPoint_recruit DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
 #2.1 企业表
-CREATE TABLE IF NOT EXISTS `tensquare_recruit`.`tb_enterprise`(
+CREATE TABLE IF NOT EXISTS `rewardPoint_recruit`.`tb_enterprise`(
    `id` VARCHAR(20) NOT NULL,
    `name` VARCHAR(100) COMMENT '企业名称',
    `summary` VARCHAR(100) COMMENT '企业简介' ,
@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS `tensquare_recruit`.`tb_enterprise`(
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 #2.2 招聘表
-CREATE TABLE IF NOT EXISTS `tensquare_recruit`.`tb_recruit`(
+CREATE TABLE IF NOT EXISTS `rewardPoint_recruit`.`tb_recruit`(
    `id` VARCHAR(20) NOT NULL,
    `jobname` VARCHAR(100) COMMENT '职位名称',
    `salary` VARCHAR(100) COMMENT '薪资范围' ,
@@ -48,16 +48,16 @@ CREATE TABLE IF NOT EXISTS `tensquare_recruit`.`tb_recruit`(
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 #3、问答微服务
-CREATE DATABASE IF NOT EXISTS tensquare_qa DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
+CREATE DATABASE IF NOT EXISTS rewardPoint_qa DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
 #3.1 中间表tb_pl，关联problem & label
-CREATE TABLE IF NOT EXISTS `tensquare_qa`.`tb_pl`(
+CREATE TABLE IF NOT EXISTS `rewardPoint_qa`.`tb_pl`(
    `problemid` VARCHAR(20) NOT NULL COMMENT '问题ID',
    `labelid` VARCHAR(20) NOT NULL COMMENT '标签ID',
    PRIMARY KEY (`problemid`,`labelid`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 #3.2 problem 表
-CREATE TABLE IF NOT EXISTS `tensquare_qa`.`tb_problem`(
+CREATE TABLE IF NOT EXISTS `rewardPoint_qa`.`tb_problem`(
    `id` VARCHAR(20) NOT NULL COMMENT '问题ID',
    `title` VARCHAR(100) COMMENT '标题',
    `content` TEXT COMMENT '内容',
@@ -75,7 +75,7 @@ CREATE TABLE IF NOT EXISTS `tensquare_qa`.`tb_problem`(
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 #3.3 回复表 tb_reply
-CREATE TABLE IF NOT EXISTS `tensquare_qa`.`tb_reply`(
+CREATE TABLE IF NOT EXISTS `rewardPoint_qa`.`tb_reply`(
    `id` VARCHAR(20) NOT NULL COMMENT '回复ID',
    `problemid` VARCHAR(20) COMMENT '问题ID',
    `content` TEXT COMMENT '回复内容',
@@ -87,9 +87,9 @@ CREATE TABLE IF NOT EXISTS `tensquare_qa`.`tb_reply`(
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 #4、文章微服务
-CREATE DATABASE IF NOT EXISTS tensquare_article DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
+CREATE DATABASE IF NOT EXISTS rewardPoint_article DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
 
-CREATE TABLE IF NOT EXISTS `tensquare_article`.`tb_article`(
+CREATE TABLE IF NOT EXISTS `rewardPoint_article`.`tb_article`(
    `id` VARCHAR(20) NOT NULL COMMENT '文章ID',
    `columnid` VARCHAR(100) COMMENT '专栏ID',
    `userid` VARCHAR(100) COMMENT '用户ID',
@@ -113,9 +113,9 @@ CREATE TABLE IF NOT EXISTS `tensquare_article`.`tb_article`(
 #5、缓存处理
 
 #6、用户
-CREATE DATABASE IF NOT EXISTS tensquare_user DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
+CREATE DATABASE IF NOT EXISTS rewardPoint_user DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
 
-CREATE TABLE IF NOT EXISTS `tensquare_user`.`tb_user`(
+CREATE TABLE IF NOT EXISTS `rewardPoint_user`.`tb_user`(
    `id` VARCHAR(20) NOT NULL COMMENT '用户ID',
    `mobile` VARCHAR(100) COMMENT '手机号码',
    `password` VARCHAR(100) COMMENT '密码',
@@ -135,7 +135,7 @@ CREATE TABLE IF NOT EXISTS `tensquare_user`.`tb_user`(
    PRIMARY KEY (`id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE IF NOT EXISTS `tensquare_user`.`tb_admin`(
+CREATE TABLE IF NOT EXISTS `rewardPoint_user`.`tb_admin`(
    `id` VARCHAR(20) NOT NULL COMMENT '管理员ID',
    `loginname` VARCHAR(100) COMMENT '管理员名称',
    `password` VARCHAR(100) COMMENT '密码',
@@ -144,16 +144,16 @@ CREATE TABLE IF NOT EXISTS `tensquare_user`.`tb_admin`(
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 #交友服务
-CREATE DATABASE IF NOT EXISTS tensquare_friend DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
+CREATE DATABASE IF NOT EXISTS rewardPoint_friend DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
 
-CREATE TABLE IF NOT EXISTS `tensquare_friend`.`tb_friend`(
+CREATE TABLE IF NOT EXISTS `rewardPoint_friend`.`tb_friend`(
    `userid` VARCHAR(20) NOT NULL COMMENT '用户ID',
    `friendid` VARCHAR(20) COMMENT '好友id',
    `islike` VARCHAR(2) COMMENT '是否相互喜欢',
    PRIMARY KEY (`userid`, `friendid`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE IF NOT EXISTS `tensquare_friend`.`tb_nofriend`(
+CREATE TABLE IF NOT EXISTS `rewardPoint_friend`.`tb_nofriend`(
    `userid` VARCHAR(20) NOT NULL COMMENT '用户ID',
    `friendid` VARCHAR(20) COMMENT '好友id',
    PRIMARY KEY (`userid`, `friendid`)
